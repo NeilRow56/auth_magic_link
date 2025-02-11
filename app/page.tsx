@@ -1,5 +1,6 @@
 import { auth, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import prisma from "@/lib/prisma";
 import Link from "next/link";
 
 export default async function Home() {
@@ -12,6 +13,8 @@ export default async function Home() {
         </Button>
       </main>
     );
+
+  const users = await prisma.user.findMany({});
   return (
     <main className="flex flex-col items-center py-12">
       <h1 className="">Welcome {session.user?.email}</h1>
@@ -25,6 +28,12 @@ export default async function Home() {
           <button type="submit">Sign Out</button>
         </form>
       </div>
+      <h1 className="font-bold text-4xl mt-6">Users</h1>
+      {users.map((user) => (
+        <div key={user.id} className="text-blue-600">
+          {user.email}
+        </div>
+      ))}
     </main>
   );
 }
