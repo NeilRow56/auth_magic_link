@@ -7,9 +7,6 @@ import Resend from "next-auth/providers/resend";
 import prisma from "./lib/prisma";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  theme: {
-    logo: "/logo.png",
-  },
   adapter: PrismaAdapter(prisma) as Adapter,
   secret: process.env.AUTH_SECRET,
   providers: [
@@ -18,6 +15,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   pages: {
+    signIn: "/login",
     verifyRequest: "/verify",
   },
 });
