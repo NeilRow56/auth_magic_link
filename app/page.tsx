@@ -30,9 +30,19 @@ export default async function Home() {
       </div>
       <h1 className="font-bold text-4xl mt-6">Users</h1>
       {users.map((user) => (
-        <div key={user.id} className="text-blue-600">
-          {user.email}
-        </div>
+        <ul
+          key={user.id}
+          className="text-blue-600 list-inside list-disc w-[400px] mx-auto"
+        >
+          <li className="mt-2">
+            <Link
+              href={`/user/${user.id}}`}
+              className="hover:bg-gray-200 rounded-md p-1"
+            >
+              {user.firstName || `User ${user.id}`}
+            </Link>
+          </li>
+        </ul>
       ))}
     </main>
   );
